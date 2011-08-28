@@ -1,0 +1,11 @@
+application: hiyahome
+version: 1
+runtime: python
+api_version: 1
+
+handlers:
+- url: /image
+  static_dir: image
+
+- url: .*
+  script: main.py
