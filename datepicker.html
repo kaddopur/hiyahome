@@ -1,0 +1,59 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Date Picker - HIYA</title>
+        <link rel="stylesheet" href="http://jqueryui.com/themes/base/jquery.ui.all.css">
+        <script src="http://jqueryui.com/jquery-1.6.2.js"></script>
+        <script src="http://jqueryui.com/ui/jquery.ui.core.js"></script>
+        <script src="http://jqueryui.com/ui/jquery.ui.widget.js"></script>
+        <script src="http://jqueryui.com/ui/jquery.ui.datepicker.js"></script>
+        <link rel="stylesheet" href="http://jqueryui.com/demos.css">
+        <link rel="stylesheet" href="http://twitter.github.com/bootstrap/1.4.0/bootstrap.min.css">
+        <script>
+        $(function() {
+            $( "#datepicker" ).datepicker();
+        });
+        </script>
+    </head>
+
+    <body>
+        <div class="topbar" data-scrollspy="scrollspy" >
+            <div class="topbar-inner">
+                <div class="container">
+                    <a class="brand" href="/">HIYA</a>
+                    <ul class="nav">
+                        <li class="active"><a href="">Date</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="container">
+            <div class="row" style="margin-top:75px">
+                <div class="span12">
+                    <form action="/set_date">
+                        下次聚會日期：<input type="text" id="datepicker" class="xlarge" name="date">
+                        <input type="submit" class="btn primary" >
+                    </form>
+                </div>
+                
+                <div class="span4">
+                    {% ifequal status "ok" %}
+                    <div class="alert-message block-message success">
+                        <a class="close" href="/admin">&times;</a>
+                        <p><strong>Well done!</strong><br />成功將聚會日期設定為{{ date }}</p>
+                    </div>
+                    {% endifequal %}
+                    
+                    {% ifequal status "error" %}
+                    <div class="alert-message error">
+                        <a class="close" href="/admin">&times;</a>
+                        <p><strong>Oh snap!</strong><br />聚會日期設定失敗</p>
+                    </div>
+                    {% endifequal %}
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

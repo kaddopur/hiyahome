@@ -16,24 +16,65 @@
 #
 import cgi
 import os
+from dbmodel import *
 from google.appengine.api import users
 from google.appengine.ext import webapp
 from google.appengine.ext.webapp.util import run_wsgi_app
 from google.appengine.ext import db
 from google.appengine.ext.webapp import template
+import datetime
+
+admin_list = ['chaoju.huang', 'leoleo168', 'nick90225']
 
 class MainPage(webapp.RequestHandler):
     def get(self):
-
-
-        template_values = {}
-
+        date_picked = Date.all().get()
+        if date_picked:
+            template_values = {'date': str(date_picked.datepicked).split('-')}
+        else:
+            template_values = {'date': ['00', '00', '00']}
         path = os.path.join(os.path.dirname(__file__), 'index.html')
         self.response.out.write(template.render(path, template_values))
 
 
-application = webapp.WSGIApplication(
-                                     [('/', MainPage)],
+class Admin(webapp.RequestHandler):
+    def get(self):
+        template_values = {}
+        path = os.path.join(os.path.dirname(__file__), 'datepicker.html')
+        self.response.out.write(template.render(path, template_values))
+        
+class SetDate(webapp.RequestHandler):
+    def get(self):
+        try:
+            date_str = self.request.get('date')
+            date_str = date_str.split('/')
+            date_str = date_str[-1:] + date_str[:-1]
+            
+            if self.request.get('date'):
+                if Date.all().count() < 1:
+                    date_picked = Date(datepicked=datetime.date(*[int(s) for s in date_str]))
+                    date_picked.put()
+                else:
+                    date_picked = Date.all().get()
+                    date_picked.datepicked = datetime.date(*[int(s) for s in date_str])
+                    date_picked.put()
+                    
+                template_values = {'status': 'ok',
+                                   'date': date_picked.datepicked}
+            else:
+                template_values = {'status': 'error'}
+            
+        except ValueError:
+            template_values = {'status': 'error'}
+        
+        path = os.path.join(os.path.dirname(__file__), 'datepicker.html')
+        self.response.out.write(template.render(path, template_values))
+        
+            
+
+application = webapp.WSGIApplication([('/', MainPage),
+	                                  ('/admin711', Admin),
+                                      ('/set_date', SetDate)],
                                      debug=True)
 
 def main():
