@@ -30,7 +30,10 @@ class MainPage(webapp.RequestHandler):
     def get(self):
         date_picked = Date.all().get()
         if date_picked:
-            template_values = {'date': str(date_picked.datepicked).split('-')}
+            template_values = {'date': str(date_picked.datepicked).split('-'), 
+                               'place': date_picked.place,
+                               'place_url': date_picked.place_url,
+                               'time': date_picked.time}
         else:
             template_values = {'date': ['00', '00', '00']}
         path = os.path.join(os.path.dirname(__file__), 'index.html')
@@ -53,14 +56,23 @@ class SetDate(webapp.RequestHandler):
             if self.request.get('date'):
                 if Date.all().count() < 1:
                     date_picked = Date(datepicked=datetime.date(*[int(s) for s in date_str]))
+                    date_picked.place = self.request.get('place')
+                    date_picked.place_url = self.request.get('place_url')
+                    date_picked.time = self.request.get('time')
                     date_picked.put()
                 else:
                     date_picked = Date.all().get()
                     date_picked.datepicked = datetime.date(*[int(s) for s in date_str])
+                    date_picked.place = self.request.get('place')
+                    date_picked.place_url = self.request.get('place_url')
+                    date_picked.time = self.request.get('time')
                     date_picked.put()
                     
                 template_values = {'status': 'ok',
-                                   'date': date_picked.datepicked}
+                                   'date': date_picked.datepicked,
+                                   'place': date_picked.place,
+                                   'place_url': date_picked.place_url,
+                                   'time': date_picked.time}
             else:
                 template_values = {'status': 'error'}
             
