@@ -3,17 +3,14 @@
     <head>
         <meta charset="utf-8">
         <title>Date Picker - HIYA</title>
-        <link rel="stylesheet" href="http://jqueryui.com/themes/base/jquery.ui.all.css">
-        <script src="http://jqueryui.com/jquery-1.6.2.js"></script>
-        <script src="http://jqueryui.com/ui/jquery.ui.core.js"></script>
-        <script src="http://jqueryui.com/ui/jquery.ui.widget.js"></script>
-        <script src="http://jqueryui.com/ui/jquery.ui.datepicker.js"></script>
-        <link rel="stylesheet" href="http://jqueryui.com/demos.css">
-        <link rel="stylesheet" href="http://twitter.github.com/bootstrap/1.4.0/bootstrap.min.css">
+        <link type="text/css" href="style/jquery-ui-1.8.17.custom.css" rel="stylesheet" />	
+        <script type="text/javascript" src="script/jquery-1.7.1.min.js"></script>
+        <script type="text/javascript" src="script/jquery-ui-1.8.17.custom.min.js"></script>
+        <link rel="stylesheet" href="style/bootstrap.css">
         <script>
-        $(function() {
+          $(function() {
             $( "#datepicker" ).datepicker();
-        });
+          });
         </script>
     </head>
 
@@ -25,6 +22,10 @@
                     <ul class="nav">
                         <li class="active"><a href="">Date</a></li>
                     </ul>
+                    
+                    <ul class="nav pull-right">
+                      <li><a href="{{ logout_uri }}">Logout</a></li>
+                    </ul>
                 </div>
             </div>
         </div>
@@ -33,6 +34,9 @@
             <div class="row" style="margin-top:75px">
                 <div class="span10">
                     <form action="/set_date">
+                        <p>
+                            　　回數：<input type="text" id="round" class="xlarge" name="round" value="{{ round }}">
+                        </p>
                         <p>
                             聚會地點：<input type="text" id="place" class="xlarge" name="place" value="新竹市立體育場">
                         </p>
@@ -52,8 +56,8 @@
                 <div class="span6">
                     {% ifequal status "ok" %}
                     <div class="alert-message block-message success">
-                        <a class="close" href="/admin">&times;</a>
-                        <p><strong>Well done!</strong><br />成功將下次聚會<br />地點設定為: <strong>{{ place }}</strong><a href="{{ place_url }}">(連結)</a>
+                        <a class="close" href="/admin711">&times;</a>
+                        <p><strong>Well done!</strong><br />成功將下次聚會 <strong>(第{{ round }}回)</strong><br />地點設定為: <strong>{{ place }}</strong><a href="{{ place_url }}">(連結)</a>
                                                                            <br />時間設定為: <strong>{{ time }}</strong>
                                                                            <br />日期設定為: <strong>{{ date }}</strong></p>
                     </div>

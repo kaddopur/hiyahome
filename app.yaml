@@ -4,8 +4,23 @@ runtime: python
 api_version: 1
 
 handlers:
+- url: /style
+  static_dir: style
+  
 - url: /image
   static_dir: image
-
-- url: .*
+  
+- url: /script
+  static_dir: script
+  
+- url: /admin711
   script: main.py
+  login: required
+
+- url: /set_date
+  script: main.py
+  login: required  
+
+- url: /.*
+  script: main.py
+
