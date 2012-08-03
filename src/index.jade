@@ -1,0 +1,48 @@
+!!! 5
+
+html(charset='utf-8')
+  head
+    meta(name='description', content='Hsinchu Interactive Yo-yo Association')
+    meta(name='keywords', content='HIYA,新竹互動式溜溜球協會,Taiwan,Hsinchu,yoyo,yo-yo,溜溜球,台灣,新竹,搖搖,悠悠球,悠悠,sport,新竹市立體育場')
+    meta(name='author', content='kaddopur')
+    meta(name='google-site-verification', content='Up-ER3sf6imUYWpF77m1jBb7A6zi9PG86UUwtF46ATc')
+
+    title HIYA 新竹互動式溜溜球協會
+
+    link(rel='stylesheet', href='css/bootstrap.min.css')
+    link(rel='stylesheet', href='css/index.css')
+
+  body
+    #fb-root
+    script
+      (function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/zh_TW/all.js#xfbml=1&appId=236955576406422";
+        fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'facebook-jssdk'));
+
+    .container
+      .row
+        .span8.offset2
+          img#homepic(src='img/index.png')
+      .row#info
+        .span5.offset2
+          h3#place
+            | 聚會地點：
+            a(href='{{place_url}}', target='_new') {{place}}
+          h3#time
+            span 聚會時間：
+            | {{date.0}}年{{date.1}}月{{date.2}}日 (第{{round}}回)
+            p 　　　　　{{time}}
+        .span5
+          a#fb-label(href='https://www.facebook.com/groups/215966918432883/', target='_blank')
+            img(src='img/fb_icon.png')
+            | 官方臉書社團
+      .row#footer
+        .span10.offset2
+          p 
+            | 原則上每週日皆有聚會，如當週遇天候不佳或節日等臨時狀況時將彈性暫停一次。詳情請見
+            a(href='https://www.facebook.com/groups/215966918432883/', target='_blank') 官方臉書社團
+          .fb-like(data-href='http://hiya.tw/', data-send='false', data-width='450', data-show-faces='true', data-colorscheme='dark')

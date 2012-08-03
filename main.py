@@ -101,6 +101,8 @@ class SetDate(webapp.RequestHandler):
         
         path = os.path.join(os.path.dirname(__file__), 'datepicker.html')
         self.response.out.write(template.render(path, template_values))
+
+        self.redirect('/')
         
 class NotFoundPageHandler(webapp.RequestHandler):
     def get(self):

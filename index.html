@@ -1,68 +1,48 @@
-<html>
-	<head>
-        <meta name="description" content="Hsinchu Interactive Yo-yo Association" />
-        <meta name="keywords" content="HIYA,新竹互動式溜溜球協會,Taiwan,Hsinchu,yoyo,yo-yo,溜溜球,台灣,新竹,搖搖,悠悠球,悠悠,sport,新竹市立體育場" />
-        <meta name="author" content="Jason C. Huang" />
-        <meta name="google-site-verification" content="Up-ER3sf6imUYWpF77m1jBb7A6zi9PG86UUwtF46ATc" />
-        
-		<title>HIYA 新竹互動式溜溜球協會</title>
-		<link rel="stylesheet" href="style/bootstrap.css">
-		
-		<style type="text/css">
-			#homepic {
-				padding: 0;
-				margin: 0;
-				width: 100%;
-			}
-
-			.whitetext {
-				color: white;
-
-			}
-
-			a:link {
-				text-decoration: none;
-			}
-
-		</style>
-	</head>
-	
-	<body charset="utf8" style="background: #000;">
-		<div class="container">
-			<div class="row" style="margin-top: 100;">
-				<div class="span10 offset3">
-					<img id="homepic" src="image/index.png">
-				</div>
-			</div>
-			
-		    <!--
-			<div class="row">
-				<div class="span6 offset5">
-					<blockquote>
-						<p class="whitetext">玩球就是要開心地玩</p>
-						<small>by 團長 小庫</small>
-					</blockquote>
-				</div>
-			</div>
-			-->
-			
-			<div class="row" style="margin-top: 20;">
-				<div class="span6 offset3">
-					<h3 class="whitetext">聚會地點：<a href="{{ place_url }}" target="_new">{{ place }}</a></h3>
-					<h3 class="whitetext">聚會時間：<a href="#">{{ date.0 }}年{{ date.1 }}月{{ date.2 }}日 (第{{round}}回)<br />　　　　　{{ time }}</a></h3>
-					
-				</div>
-				
-				<div class="span6">
-					<a href="https://www.facebook.com/groups/215966918432883/" target="_blank"><img src="image/fb_icon.png" style="height: 72; margin: 0; padding: 0; float: left;"></a>
-					<div style="float: left; padding-top: 15;"><h2><a href="https://www.facebook.com/groups/215966918432883/"  target="_blank">官方臉書社團</a></h2></div>
-				</div>
-			</div>
-			<div class="row" style="margin-top: 40;">
-				<div class="span8 offset4">
-					<p>原則上每週日皆有聚會，如當週遇天候不佳或節日等臨時狀況時將彈性暫停一次。詳情請見<a href="https://www.facebook.com/groups/215966918432883/" target="_blank">官方臉書</a>之活動公告。</p>
-				</div>
-			</div>
-		</div>
-	</body>
+<!DOCTYPE html>
+<html charset="utf-8">
+  <head>
+    <meta name="description" content="Hsinchu Interactive Yo-yo Association">
+    <meta name="keywords" content="HIYA,新竹互動式溜溜球協會,Taiwan,Hsinchu,yoyo,yo-yo,溜溜球,台灣,新竹,搖搖,悠悠球,悠悠,sport,新竹市立體育場">
+    <meta name="author" content="kaddopur">
+    <meta name="google-site-verification" content="Up-ER3sf6imUYWpF77m1jBb7A6zi9PG86UUwtF46ATc">
+    <title>HIYA 新竹互動式溜溜球協會</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/index.css">
+  </head>
+  <body>
+    <div id="fb-root"></div>
+    <script>
+      (function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/zh_TW/all.js#xfbml=1&appId=236955576406422";
+        fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'facebook-jssdk'));
+      
+    </script>
+    <div class="container">
+      <div class="row">
+        <div class="span8 offset2"><img id="homepic" src="img/index.png"></div>
+      </div>
+      <div id="info" class="row">
+        <div class="span5 offset2">
+          <h3 id="place">聚會地點：<a href="{{place_url}}" target="_new">{{place}}</a></h3>
+          <h3 id="time"><span>聚會時間：</span>{{date.0}}年{{date.1}}月{{date.2}}日 (第{{round}}回)
+            <p>　　　　　{{time}}</p>
+          </h3>
+        </div>
+        <div class="span5"><a id="fb-label" href="https://www.facebook.com/groups/215966918432883/" target="_blank"><img src="img/fb_icon.png">官方臉書社團</a></div>
+      </div>
+      <div id="footer" class="row">
+        <div class="span10 offset2">
+          <p>
+             
+            原則上每週日皆有聚會，如當週遇天候不佳或節日等臨時狀況時將彈性暫停一次。詳情請見<a href="https://www.facebook.com/groups/215966918432883/" target="_blank">官方臉書社團</a>
+          </p>
+          <div data-href="http://hiya.tw/" data-send="false" data-width="450" data-show-faces="true" data-colorscheme="dark" class="fb-like"></div>
+        </div>
+      </div>
+    </div>
+  </body>
 </html>

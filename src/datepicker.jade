@@ -1,0 +1,51 @@
+!!! 5
+
+head(charset='utf-8')
+  head
+    title Date Picker - HIYA
+    
+    link(rel='stylesheet', href='css/bootstrap.min.css')
+    link(rel='stylesheet', href='https://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/smoothness/jquery.ui.all.css')
+    link(rel='stylesheet', href='css/datepicker.css')
+
+    script(src='http://www.google.com/jsapi')
+    script
+      google.load('jquery','1');
+      google.load('jqueryui', '1');
+    script(src='js/datepicker.js')
+
+  body      
+    .container
+      .row
+        .span12
+          form.form-horizontal(action='/set_date')
+            fieldset 
+              .control-group 
+                label.control-label 回數
+                .controls
+                  input.input-xlarge#round(type='text', name='round', value='{{round}}')
+                  span.help-inline 請更新聚會回數
+              .control-group 
+                label.control-label 聚會地點
+                .controls
+                  select#place(name='place')
+              .control-group 
+                label.control-label 網址
+                .controls
+                  input.input-xlarge.uneditable-input#place_url(type='text', name='place_url')
+              .control-group 
+                label.control-label 聚會時間
+                .controls
+                  input.input-xlarge#time(type='text', name='time', value='13:00 至 18:00')
+              .control-group 
+                label.control-label 聚會日期
+                .controls
+                  input.input-xlarge#datepicker(type='text', name='date')
+                  span.help-inline 請填入聚會日期
+              .control-group
+                .controls
+                  .btn.btn-primary#submit 提交
+
+
+
+    
