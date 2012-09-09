@@ -25,26 +25,40 @@ html(charset='utf-8')
 
     .container
       .row
-        .span8.offset2
-          img#homepic(src='img/index.png')
+        .span7.offset1
+          img#homepic(src='img/logo.png')
+          img#subline(src='img/subline.png')
+        .span3#fb-label
+          span 官方臉書社團由此進入　
+          a(href='https://www.facebook.com/groups/215966918432883/', target='_blank')
+            img#fb(src='img/f_logo.png')
+      .row#main
+        .span10.offset1
+          img#main(src='img/main.jpg')
       .row#info
-        .span5.offset2
-          h3#place
-            | 聚會地點：
-            a(href='{{place_url}}', target='_new') {{place}}
-          h3#time
-            span 聚會時間：
-            | {{date.0}}年{{date.1}}月{{date.2}}日 (第{{round}}回)
-            p 　　　　　{{time}}
+        .span5.offset1
+          span.label.label-warning 聚會時間
+          h2 {{date.0}}年{{date.1}}月{{date.2}}日 (第{{round}}回)
+          h2 {{time}}
+          p
+          span.label.label-warning 聚會地點
+          h2
+            //a(href='{{place_url}}', target='_new') {{place}}
+            {{place}}
         .span5
-          a#fb-label(href='https://www.facebook.com/groups/215966918432883/', target='_blank')
-            img(src='img/fb_icon.png')
-            | 官方臉書社團
-      .row#footer
-        .span10.offset2
-          p 
-            | 原則上每週日皆有聚會，如當週遇天候不佳或節日等臨時狀況時將彈性暫停一次。詳情請見
+          .alert.alert-success
+            | 原則上每週日皆有聚會，如當週遇特殊節日或其他臨時狀況時將彈性暫停一次。詳情請見
             a(href='https://www.facebook.com/groups/215966918432883/', target='_blank') 官方臉書社團
-      .row
-        .span6.offset3
+          p
+          span.label.label-success 贊助單位
+          a(href='http://www.adegle.com/', target='_black')
+            img#adegle(src='img/a_logo.png', alt='Adegleyoyos 裕和商店')
+          p
+          span.label.label-success 協力單位
+          a(href='http://www.fecityonline.com/BigCity/index.do', target='_black')
+            img#bigcity(src='img/b_logo.png', alt='BigCity 遠東巨城購物中心')
+          p
+          
+      .row#fb
+        .span6.offset1
           .fb-like(data-href='http://hiya.tw/', data-send='true', data-width='600', data-show-faces='true', data-colorscheme='dark')

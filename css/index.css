@@ -1,13 +1,23 @@
+html,
 body {
-  background: #000;
+  background: url("/img/bg.png") left top repeat, #00a223;
+  background: url("/img/bg.png") left top repeat, -moz-linear-gradient(0deg, #00a223 10%, #b0d586 90%);
+  background: url("/img/bg.png") left top repeat, -webkit-gradient(linear, left top, right top, color-stop(10%, #00a223), color-stop(90%, #b0d586));
+  background: url("/img/bg.png") left top repeat, -webkit-linear-gradient(0deg, #00a223 10%, #b0d586 90%);
+  background: url("/img/bg.png") left top repeat, -o-linear-gradient(0deg, #00a223 10%, #b0d586 90%);
+  background: url("/img/bg.png") left top repeat, -ms-linear-gradient(0deg, #00a223 10%, #b0d586 90%);
+  background: url("/img/bg.png") left top repeat, linear-gradient(0deg, #00a223 10%, #b0d586 90%);
   color: #fff;
-  padding-top: 40px;
+  height: 100%;
 }
 .row#info {
-  margin-top: 20px;
+  margin-top: 25px;
 }
 .row#footer {
   margin-top: 30px;
+}
+.row#fb {
+  margin-top: 20px;
 }
 h3#time {
   color: #08c;
@@ -15,10 +25,42 @@ h3#time {
 h3#time span {
   color: #fff;
 }
-a#fb-label {
-  font-size: x-large;
-  font-weight: bold;
+.container {
+  min-height: 100%;
+  margin-bottom: 40px;
 }
-.fb-like {
-  margin-top: 40px;
+img#homepic,
+img#subline {
+  margin-top: 20px;
+  margin-left: -18px;
+  margin-bottom: 8px;
+  height: 100px;
+}
+img#main {
+  -webkit-box-shadow: 0px 4px 10px 2px rgba(0,0,0,0.5);
+  box-shadow: 0px 4px 10px 2px rgba(0,0,0,0.5);
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+}
+#fb-label {
+  position: relative;
+  left: 42px;
+  top: 75px;
+}
+#fb-label span {
+  position: relative;
+  top: 12px;
+}
+img#fb {
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+}
+img#bigcity,
+img#adegle {
+  margin-left: 12px;
+}
+img#fb,
+img#bigcity,
+img#adegle {
+  height: 36px;
 }
