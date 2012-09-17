@@ -103,6 +103,18 @@ class SetDate(webapp.RequestHandler):
         self.response.out.write(template.render(path, template_values))
 
         self.redirect('/')
+
+class ODYCPAA2012IndexHandler(webapp.RequestHandler):
+    def get(self):
+        template_values = {}
+        path = os.path.join(os.path.dirname(__file__), 'odycpaa2012index.html')
+        self.response.out.write(template.render(path, template_values))
+
+class ODYCPAA2012RulesHandler(webapp.RequestHandler):
+    def get(self):
+        template_values = {}
+        path = os.path.join(os.path.dirname(__file__), 'odycpaa2012rules.html')
+        self.response.out.write(template.render(path, template_values))
         
 class NotFoundPageHandler(webapp.RequestHandler):
     def get(self):
@@ -112,6 +124,8 @@ class NotFoundPageHandler(webapp.RequestHandler):
 application = webapp.WSGIApplication([('/', MainPage),
 	                                  ('/admin711', Admin),
                                       ('/set_date', SetDate),
+                                      ('/flasjkdflwkejrhla', ODYCPAA2012IndexHandler),
+                                      ('/aslzxkcuvhaawelkr', ODYCPAA2012RulesHandler),
                                       ('/.*', NotFoundPageHandler)],
                                      debug=True)
 

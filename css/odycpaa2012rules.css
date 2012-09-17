@@ -1,0 +1,56 @@
+#cover {
+  background-image: url("/img/cover.jpg");
+  background-size: 100%;
+  background-position: top center;
+  height: 280px;
+  -webkit-box-shadow: inset 0px -2px 4px rgba(0,0,0,0.2);
+  box-shadow: inset 0px -2px 4px rgba(0,0,0,0.2);
+  color: #fff;
+}
+#cover .container {
+  padding-top: 120px;
+}
+#cover h1 {
+  font-size: 72px;
+}
+#cover #subline {
+  font-size: 48px;
+}
+#footer {
+  background: whiteSmoke;
+  font-size: 10px;
+  border-top: 1px solid #ececec;
+  height: 120px;
+}
+#footer .container {
+  padding-top: 50px;
+}
+.affix {
+  position: fixed;
+  top: 50px;
+}
+#sidenav {
+  margin-top: 50px;
+}
+#sidenav i {
+  position: relative;
+  left: 125px;
+}
+#sidenav li:first-child {
+  -webkit-border-radius: 6px 6px 0px 0px;
+  border-radius: 6px 6px 0px 0px;
+}
+#sidenav li:last-child {
+  -webkit-border-radius: 0px 0px 6px 6px;
+  border-radius: 0px 0px 6px 6px;
+}
+#main {
+  position: relative;
+  top: -330px;
+}
+#main h3 {
+  padding-top: 95px;
+}
+.active {
+  color: #00f;
+}
