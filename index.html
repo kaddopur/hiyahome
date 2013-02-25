@@ -1,13 +1,27 @@
 <!DOCTYPE html>
-<html charset="utf-8">
+<html lang="zh_TW">
   <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
     <meta name="description" content="Hsinchu Interactive Yo-yo Association">
     <meta name="keywords" content="HIYA,新竹互動式溜溜球協會,Taiwan,Hsinchu,yoyo,yo-yo,溜溜球,台灣,新竹,搖搖,悠悠球,悠悠,sport,新竹市立體育場">
-    <meta name="author" content="kaddopur">
+    <meta name="author" content="KeDouBo">
     <meta name="google-site-verification" content="Up-ER3sf6imUYWpF77m1jBb7A6zi9PG86UUwtF46ATc">
-    <title>HIYA 新竹互動式溜溜球協會</title>
-    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <title>H.I.Y.A. 新竹互動式溜溜球協會</title>
+    <link rel="stylesheet" href="stylesheets/foundation.min.css">
+    <link rel="stylesheet" href="stylesheets/app.css">
     <link rel="stylesheet" href="css/index.css">
+    <script src="javascripts/modernizr.foundation.js"></script>
+    <script src="javascripts/jquery.js"></script>
+    <script src="javascripts/jquery.foundation.reveal.js"></script>
+    <script src="javascripts/jquery.foundation.topbar.js"></script>
+    <script src="javascripts/jquery.foundation.orbit.js"></script>
+    <script>
+      $(window).load(function() {
+        $("#featured").orbit();
+      });
+      
+    </script>
   </head>
   <body>
     <div id="fb-root"></div>
@@ -21,35 +35,66 @@
       }(document, 'script', 'facebook-jssdk'));
       
     </script>
-    <div class="container">
-      <div class="row">
-        <div class="span7 offset1"><img id="homepic" src="img/logo.png"></div>
-        <div id="fb-label" class="span3"><span>官方臉書社團由此進入　</span><a href="https://www.facebook.com/groups/215966918432883/" target="_blank"><img id="fb" src="img/f_logo.png"></a></div>
-      </div>
-      <div id="main" class="row">
-        <div class="span10 offset1"><img id="main" src="img/main.jpg"></div>
-      </div>
-      <div id="info" class="row">
-        <div class="span5 offset1"><span class="label label-warning">聚會時間</span>
-          <h2>{{date.0}}年{{date.1}}月{{date.2}}日 (第{{round}}回)</h2>
-          <h2>{{time}}</h2>
-          <p></p><span class="label label-warning">聚會地點</span>
-          <h2>
-            <!--a(href='{{place_url}}', target='_new') {{place}}-->{{place}}
-          </h2>
-        </div>
-        <div class="span5">
-          <div class="alert alert-success">原則上每週日皆有聚會，如當週遇特殊節日或其他臨時狀況時將彈性暫停一次。詳情請見<a href="https://www.facebook.com/groups/215966918432883/" target="_blank">官方臉書社團</a></div>
-          <p></p><span class="label label-success">贊助單位</span><a href="http://www.adegle.com/" target="_black"><img id="adegle" src="img/a_logo.png" alt="Adegleyoyos 裕和商店"></a>
-          <p></p><span class="label label-success">協力單位</span><a href="http://www.fecityonline.com/BigCity/index.do" target="_black"><img id="bigcity" src="img/b_logo.png" alt="BigCity 遠東巨城購物中心"></a>
-          <p></p>
-        </div>
-      </div>
-      <div id="fb" class="row">
-        <div class="span6 offset1">
-          <div data-href="http://hiya.tw/" data-send="true" data-width="600" data-show-faces="true" data-colorscheme="light" class="fb-like"></div>
-        </div>
+    <div class="row">
+      <div class="twelve columns">
+        <ul class="top-bar">
+          <ul>
+            <li class="name">
+              <h1> <a href="#">H.I.Y.A. 新竹互動式溜溜球協會</a></h1>
+            </li>
+            <li class="toggle-topbar"><a href="#"></a></li>
+          </ul>
+          <section>
+            <ul class="right">
+              <li><a href="https://www.facebook.com/groups/215966918432883/" target="_blank"><img id="logo_facebook" src="img/logo_facebook.png"></a></li>
+            </ul>
+          </section>
+        </ul>
       </div>
     </div>
+    <div class="row">
+      <div class="eight columns">
+        <div id="featured"><img src="img/main.jpg"><img src="img/main2.jpg"></div>
+        <h3>我們是H.I.Y.A.</h3>
+        <p> <strong>H.I.Y.A.新竹互動式溜溜球協會</strong>成立自2006年，由新竹地區溜溜球同好自發性組成，是竹苗區唯一的定期溜溜球聚會。在這邊，我們不分年齡性別職業，只要是你對溜溜球有興趣，那就帶著你的溜溜球一起來聚會吧。</p>
+        <p>每週的聚會包含招式分享交流，不定期成果發表，也有機會試玩到世界各國各家廠牌的溜溜球。不論你是新手老手，來聚會一遭，帶著新學到的招式走吧。</p>
+        <p>此外，我們的<a href="https://www.facebook.com/groups/215966918432883/" target="_blank">官方臉書社團</a>會分享國內外溜溜球最新訊息，精彩的比賽影片，令人目不暇給的各國最新溜溜球介紹，請千萬不要錯過，趕快點個讚吧。</p>
+        <p>
+          <div data-href="http://hiya.tw/" data-send="true" data-width="600" data-show-faces="true" data-colorscheme="light" class="fb-like"></div>
+        </p>
+      </div>
+      <div class="four columns">
+        <div class="panel">
+          <h5>聚會時間</h5>
+          <p><strong>{{start_at}}（第 {{session_number}} 回）</strong><br>{{duration}}</p>
+        </div>
+        <div class="panel">
+          <h5>聚會地點</h5>
+          <p><a href="http://goo.gl/maps/qJqnf" target="_blank" class="th"><img src="https://www.google.com.tw/maps/vt/data=Ay5GWBeob_WIPLDYoIWcfVXxvZu9XwJ55OX7Ag,toIgSvU0pKC0ZDig0jh6OE3ayCXwNvfi20_8wxG1COegNKTiYmR0-WNgVfz7ngsm7NFRexdwf5Ts78yhgahTrYoW8eOGNLgQmXf1EDvDZwB9tAGFxA" alt="300新竹市東區中央路229號" title="300新竹市東區中央路229號">查看地圖</a></p>
+          <p><strong>新竹巨城購物中心7樓 溜冰場旁</strong><br>300新竹市東區中央路229號</p>
+        </div>
+        <div class="panel callout">
+          <p>原則上每週日皆有聚會，如當週遇特殊節日或其他臨時狀況時將彈性暫停一次。詳情請見<a id="callout_link" href="https://www.facebook.com/groups/215966918432883/" target="_blank">官方臉書社團</a></p>
+        </div><span class="label">贊助單位</span>
+        <p><a href="http://www.adegle.com/" target="_black"><img id="adegle" src="img/logo_adegle.png" alt="Adegleyoyos 裕和商店"></a></p><span class="label">協力單位</span>
+        <p><a href="http://www.fecityonline.com/BigCity/index.do" target="_black"><img id="bigcity" src="img/logo_bigcity.png" alt="BigCity 遠東巨城購物中心"></a></p>
+      </div>
+    </div>
+    <footer class="row">
+      <div class="twelve columns">
+        <hr>
+        <div class="row">
+          <div class="six columns">
+            <p>© 2006 - 2013 H.I.Y.A. All rights reserved.</p>
+          </div>
+          <div class="six columns">
+            <ul class="link-list right">
+              <li><a href="https://www.facebook.com/groups/215966918432883/" target="_blank">facebook</a></li>
+              <li><a href="https://twitter.com/KeDoubo" target="_blank">author</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </footer>
   </body>
 </html>
