@@ -3,25 +3,21 @@
   <head>
     <title>Date Picker - HIYA</title>
     <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/smoothness/jquery.ui.all.css">
     <link rel="stylesheet" href="css/datepicker.css">
     <script src="http://www.google.com/jsapi"></script>
-    <script>
-      google.load('jquery','1');
-      google.load('jqueryui', '1');
-    </script>
+    <script>google.load('jquery','1');</script>
     <script src="js/datepicker.js"></script>
   </head>
   <body>     
     <div class="container">
       <div class="row">
         <div class="span12">
-          <form action="/set_date" class="form-horizontal">
+          <form action="/meeting" method="post" class="form-horizontal">
             <fieldset> 
               <div class="control-group"> 
                 <label class="control-label">回數</label>
                 <div class="controls">
-                  <input id="round" type="text" name="round" value="{{round}}" class="input-xlarge"><span class="help-inline">請更新聚會回數</span>
+                  <input id="round" type="text" name="session_number" value="{{session_number}}" class="input-xlarge"><span class="help-inline">請更新聚會回數</span>
                 </div>
               </div>
               <div class="control-group"> 
@@ -33,19 +29,19 @@
               <div class="control-group"> 
                 <label class="control-label">網址</label>
                 <div class="controls">
-                  <input id="place_url" type="text" name="place_url" class="input-xlarge uneditable-input">
+                  <input id="place_url" type="url" name="place_url" class="input-xlarge uneditable-input">
                 </div>
               </div>
               <div class="control-group"> 
                 <label class="control-label">聚會時間</label>
                 <div class="controls">
-                  <input id="time" type="text" name="time" value="13:00 至 18:00" class="input-xlarge">
+                  <input id="time" type="text" name="duration" value="13:00 至 18:00" class="input-xlarge">
                 </div>
               </div>
               <div class="control-group"> 
                 <label class="control-label">聚會日期</label>
                 <div class="controls">
-                  <input id="datepicker" type="text" name="date" class="input-xlarge"><span class="help-inline">請填入聚會日期</span>
+                  <input id="datepicker" type="date" name="start_at" class="input-xlarge"><span class="help-inline">請填入聚會日期</span>
                 </div>
               </div>
               <div class="control-group">

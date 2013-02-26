@@ -4,13 +4,12 @@ places = [{name: '新竹市立體育場',              url: 'http://g.co/maps/xk
 old_round = ''
 
 initialize = ->
-  $('#datepicker').datepicker()
   for p in places
     $('select#place').prepend("<option>#{p.name}</option>")
     $('input#place_url').val(p.url)
   old_round = $('#round').val()
-  $('#round ~ span').hide()
-  $('#datepicker ~ span').hide()
+  $('#round').closest('.controls').find('span').hide()
+  $('#datepicker').closest('.controls').find('span').hide()
 
 bind_listeners = ->
   $('select#place').change ->
@@ -23,22 +22,22 @@ bind_listeners = ->
     flag = true
 
     if $('#round').val() == old_round
-      $('#round ~ span').show()
-      $('#round ~ span').parent().parent().addClass('error')
+      $('#round').closest('.controls').find('span').show()
+      $('#round').closest('.control-group').addClass('error')
       flag = false
 
     if $('#datepicker').val() == ''
-      $('#datepicker ~ span').show()
-      $('#datepicker ~ span').parent().parent().addClass('error')
+      $('#datepicker').closest('.controls').find('span').show()
+      $('#datepicker').closest('.control-group').addClass('error')
       flag = false
 
-    $('#round').change ->
-      $('#round ~ span').hide()
-      $('#round ~ span').parent().parent().removeClass('error')
+    $('#round').on 'keyup', ->
+      $('#round').closest('.controls').find('span').hide()
+      $('#round').closest('.control-group').removeClass('error')
 
-    $('#datepicker').change ->
-      $('#datepicker ~ span').hide()
-      $('#datepicker ~ span').parent().parent().removeClass('error')
+    $('#datepicker').on 'keyup change', ->
+      $('#datepicker').closest('.controls').find('span').hide()
+      $('#datepicker').closest('.control-group').removeClass('error')
 
     if flag
       $('form').submit()
