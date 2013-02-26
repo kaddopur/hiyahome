@@ -14,123 +14,85 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-import cgi
+import webapp2
+import jinja2
 import os
-from dbmodel import *
-from google.appengine.api import users
-from google.appengine.ext import webapp
-from google.appengine.ext.webapp.util import run_wsgi_app
+import logging
+from datetime import datetime
 from google.appengine.ext import db
-from google.appengine.ext.webapp import template
-import datetime
 
-admin_list = ['chaoju.huang@gmail.com', 'leoleo168@gmail.com', 'nick90225@gmail.com']
-
-class MainPage(webapp.RequestHandler):
-    def get(self):
-        date_picked = Date.all().get()
-        if date_picked:
-            template_values = {'date': str(date_picked.datepicked).split('-'), 
-                               'place': date_picked.place,
-                               'place_url': date_picked.place_url,
-                               'time': date_picked.time,
-                               'round': date_picked.round}
-        else:
-            template_values = {'date': ['00', '00', '00']}
-        path = os.path.join(os.path.dirname(__file__), 'index.html')
-        self.response.out.write(template.render(path, template_values))
+class Meeting(db.Model):
+  place = db.StringProperty()
+  place_url = db.LinkProperty()
+  start_at = db.DateTimeProperty(required=True)
+  duration = db.StringProperty()
+  session_number = db.IntegerProperty()
+  date = db.DateTimeProperty(auto_now_add=True)
 
 
-class Admin(webapp.RequestHandler):
-    def get(self):
-        user = users.get_current_user()
-        
-        if True:
-            date_picked = Date.all().get()
-            template_values = {'round': date_picked.round,
-                               'logout_uri': users.create_logout_url('/')}
-            path = os.path.join(os.path.dirname(__file__), 'datepicker.html')
-            self.response.out.write(template.render(path, template_values))
-        else:
-            self.redirect(users.create_logout_url('/'))  
-        
-class SetDate(webapp.RequestHandler):
-    def get(self):
-        user = users.get_current_user()
-        
-        if True:
-            self.renew_date()
-        else:
-            self.redirect(users.create_logout_url('/'))
-    
-    def renew_date(self):
-        try:
-            date_str = self.request.get('date')
-            date_str = date_str.split('/')
-            date_str = date_str[-1:] + date_str[:-1]
-            
-            if self.request.get('date'):
-                if Date.all().count() < 1:
-                    date_picked = Date(datepicked=datetime.date(*[int(s) for s in date_str]))
-                    date_picked.place = self.request.get('place')
-                    date_picked.place_url = self.request.get('place_url')
-                    date_picked.time = self.request.get('time')
-                    date_picked.round = self.request.get('round')
-                    date_picked.put()
-                else:
-                    date_picked = Date.all().get()
-                    date_picked.datepicked = datetime.date(*[int(s) for s in date_str])
-                    date_picked.place = self.request.get('place')
-                    date_picked.place_url = self.request.get('place_url')
-                    date_picked.time = self.request.get('time')
-                    date_picked.round = self.request.get('round')
-                    date_picked.put()
-                    
-                template_values = {'status': 'ok',
-                                   'date': date_picked.datepicked,
-                                   'place': date_picked.place,
-                                   'place_url': date_picked.place_url,
-                                   'time': date_picked.time,
-                                   'round': date_picked.round,
-                                   'logout_uri': users.create_logout_url('/')}
-            else:
-                template_values = {'status': 'error'}
-            
-        except ValueError:
-            template_values = {'status': 'error'}
-        
-        path = os.path.join(os.path.dirname(__file__), 'datepicker.html')
-        self.response.out.write(template.render(path, template_values))
+jinja_environment = jinja2.Environment(loader=jinja2.FileSystemLoader(os.path.dirname(__file__)))
 
-        self.redirect('/')
 
-class ODYCPAA2012IndexHandler(webapp.RequestHandler):
-    def get(self):
-        template_values = {}
-        path = os.path.join(os.path.dirname(__file__), 'odycpaa2012index.html')
-        self.response.out.write(template.render(path, template_values))
+class MainHandler(webapp2.RequestHandler):
+  def get(self):
+    current_meeting = Meeting.all().get()
+    if not current_meeting:
+      current_meeting = set_default_meeting()
 
-class ODYCPAA2012RulesHandler(webapp.RequestHandler):
-    def get(self):
-        template_values = {}
-        path = os.path.join(os.path.dirname(__file__), 'odycpaa2012rules.html')
-        self.response.out.write(template.render(path, template_values))
-        
-class NotFoundPageHandler(webapp.RequestHandler):
-    def get(self):
-        self.error(404)
-        self.response.out.write('<h1>Uh oh! (404 Error)</h1>')           
+    template_values = get_meeting_value(current_meeting)
+    template = jinja_environment.get_template('index.html')
+    self.response.out.write(template.render(template_values))
 
-application = webapp.WSGIApplication([('/', MainPage),
-	                                  ('/admin711', Admin),
-                                      ('/set_date', SetDate),
-                                      ('/flasjkdflwkejrhla', ODYCPAA2012IndexHandler),
-                                      ('/aslzxkcuvhaawelkr', ODYCPAA2012RulesHandler),
-                                      ('/.*', NotFoundPageHandler)],
-                                     debug=True)
 
-def main():
-    run_wsgi_app(application)
+class AdminHandler(webapp2.RequestHandler):
+  def get(self):
+    current_meeting = Meeting.all().get()
+    if not current_meeting:
+      current_meeting = set_default_meeting()
 
-if __name__ == "__main__":
-    main()
+    template_values = get_meeting_value(current_meeting)
+    template = jinja_environment.get_template('datepicker.html')
+    self.response.out.write(template.render(template_values))
+
+
+class MeetingHandler(webapp2.RequestHandler):
+  def post(self):
+    current_meeting = Meeting.all().get()
+    if not current_meeting:
+      current_meeting = set_default_meeting()
+    current_meeting.place = self.request.get('place')
+    current_meeting.place_url = self.request.get('place_url')
+    current_meeting.duration = self.request.get('duration')
+    current_meeting.session_number = int(self.request.get('session_number'))
+    s = self.request.get('start_at')
+    fmt = '%Y-%m-%d'
+    current_meeting.start_at = datetime.strptime(s, fmt)
+    current_meeting.put()
+
+    self.redirect('/')
+
+
+def get_meeting_value(meeting):
+  # t.strftime('%Y-%m-%d %H:%M:%S')
+  return {'start_at': meeting.start_at.strftime('%Y-%m-%d'),
+          'place': meeting.place,
+          'place_url': meeting.place_url,
+          'duration': meeting.duration,
+          'session_number': meeting.session_number}
+
+
+def set_default_meeting():
+  meeting = Meeting(start_at=datetime.now())
+  meeting.place = "unknown"
+  meeting.place_url = "http://www.google.com/"
+  meeting.duration = 'unknown'
+  meeting.session_number = 0
+  meeting.put()
+  return meeting
+
+
+
+app = webapp2.WSGIApplication([('/', MainHandler),
+                               ('/admin711', AdminHandler),
+                               ('/meeting', MeetingHandler)],
+                              debug=True)
